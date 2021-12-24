@@ -174,8 +174,10 @@ class Like(APIView):
                 "error" : "url tidak ditemukan"
             })
         film.save()
-
+        film = Film.objects.get(id=id)
+        serializers = FilmDetailSerializer(film)
         return Response({
             "status" : 200,
             "message" : message,
+            "data" : serializers.data
         })
